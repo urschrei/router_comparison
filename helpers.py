@@ -111,7 +111,7 @@ def decode_polyline(point_str):
     coords = []
     for coord_chunk in coord_chunks:
         coord = 0
-        for i, chunk in enumerate(coord_chunk):               
+        for i, chunk in enumerate(coord_chunk):
             coord |= chunk << (i * 5)
         # there is a 1 on the right if the coord is negative
         if coord & 0x1:
@@ -137,6 +137,7 @@ def decode_polyline(point_str):
         return LineString(points)
     else:
         return np.nan
+
 
 def project_linestring(ls, inverse=False):
     """ return a linestring projected into map coordinates """
