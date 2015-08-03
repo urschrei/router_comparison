@@ -4,3 +4,9 @@ ipython[all]
 sklearn
 scipy
 numpy
+fiona
+shapely
+basemap
+descartes
+requests[security]
+
