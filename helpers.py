@@ -3,7 +3,7 @@ import json
 import pandas as pd
 import numpy as np
 from itertools import chain
-from shapely.geometries import LineString
+from shapely.geometry import LineString
 
 
 def query_route_valhalla(
@@ -139,7 +139,7 @@ def decode_polyline(point_str):
         return np.nan
 
 
-def project_linestring(ls, inverse=False):
+def project_linestring(ls, m, inverse=False):
     """ return a linestring projected into map coordinates """
     if not pd.isnull(ls):
         return LineString(zip(*m(*zip(*ls.coords))))
