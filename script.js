@@ -7,7 +7,7 @@ $(function() {
     var map = L.map('map').setView([51.500829999995766, -0.12203999999842599], 12);
     var bg = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
-        maxZoom: 18,
+        maxZoom: 16,
         id: 'urschrei.n35fc4ge',
         accessToken: 'pk.eyJ1IjoidXJzY2hyZWkiLCJhIjoiVXN5WkVYbyJ9.87LXqCJ6CuZsfrJ5hcijpw'
     }).addTo(map);
