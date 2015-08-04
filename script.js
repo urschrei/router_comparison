@@ -1,0 +1,48 @@
+$(function() {
+    // we'll be populating this with our GeoJSON layers
+    var routes = {
+        "Valhalla": null,
+        "OSRM": null
+    };
+    var map = L.map('map').setView([51.500829999995766, -0.12203999999842599], 12);
+    var bg = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18,
+        id: 'urschrei.n35fc4ge',
+        accessToken: 'pk.eyJ1IjoidXJzY2hyZWkiLCJhIjoiVXN5WkVYbyJ9.87LXqCJ6CuZsfrJ5hcijpw'
+    }).addTo(map);
+
+    var valStyle = {
+        "color": "#008080",
+        "weight": .65,
+        "opacity": 0.5
+    };
+
+    var osrmStyle = {
+        "color": "#E87600",
+        "weight": .65,
+        "opacity": 0.5
+    };
+
+    $.getJSON("valhalla_geojson.json", function(data) {
+        routes.Valhalla = L.geoJson(data, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.name);
+            }
+        });
+        routes.Valhalla.setStyle(valStyle);
+        routes.Valhalla.addTo(map);
+    });
+
+    $.getJSON("osrm_geojson.json", function(data) {
+        routes.OSRM = L.geoJson(data, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.name);
+            }
+        });
+        routes.OSRM.setStyle(osrmStyle);
+        routes.OSRM.addTo(map);
+        // this is the second layer, so attach it to the map
+        L.control.layers(null, routes).addTo(map);
+    });
+});
