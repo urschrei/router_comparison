@@ -11,5 +11,6 @@ shapely
 basemap
 descartes
 statsmodels
+six
+patsy
 requests[security]
-
