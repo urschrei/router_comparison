@@ -8,5 +8,6 @@ fiona
 shapely
 basemap
 descartes
+statsmodels
 requests[security]
 
