@@ -6,6 +6,8 @@ scipy
 numpy
 fiona
 shapely
+# you'll have to install this with
+# pip install basemap --allow-external basemap --allow-unverified basemap
 basemap
 descartes
 statsmodels
