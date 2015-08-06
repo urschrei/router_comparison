@@ -1,6 +1,8 @@
 # The Notebook
 First, ensure you've installed all the packages from [requirements.txt](requirements.txt).  
-`Basemap`, can be pain to install, but a recent version of pip and `pip install basemap --allow-external basemap --allow-unverified basemap` should work.  
+`Basemap` can be pain to install, but a recent version of pip and `pip install basemap --allow-external basemap --allow-unverified basemap` should work.  
+
+Once this is done, run `ipython notebook` from a shell, and you should see `OSRM_vs_Valhalla` in the list.
 Some helper functions for the retrieval and processing of journeys can be found in [helpers.py](helpers.py)
 
 # HTML Route visualisation using Leaflet
