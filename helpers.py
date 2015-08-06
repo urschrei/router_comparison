@@ -155,16 +155,16 @@ def query_route_gmaps(start, end, method, key):
     try:
         req.raise_for_status()
     except requests.exceptions.HTTPError:
-        return np.nan
+        return (np.nan, np.nan)
     # currently one route, containing one leg
     try:
         route = req.json()['routes'][0]
         leg = req.json()['routes'][0]['legs'][0]
         duration = sum([step['duration']['value'] for step in leg['steps']])
         overview_polyline = route['overview_polyline']['points']
-        # all_polylines = [step['polyline']['points'] for step in leg['steps']]
+#         all_polylines = [step['polyline']['points'] for step in leg['steps']]
     except (KeyError, IndexError):
-        return np.nan
+        return (np.nan, np.nan)
     return duration, overview_polyline #, all_polylines
 
 
