@@ -1,10 +1,11 @@
+// we'll be populating this with our GeoJSON layers
+var routes = {
+    "Valhalla": null,
+    "OSRM": null,
+    "GMaps": null
+};
+
 $(function() {
-    // we'll be populating this with our GeoJSON layers
-    var routes = {
-        "Valhalla": null,
-        "OSRM": null,
-        "GMaps": null
-    };
 
     var map = L.map('map').setView([51.500829999995766, -0.12203999999842599], 12);
     var bg = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
