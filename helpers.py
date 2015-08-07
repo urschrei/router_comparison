@@ -83,7 +83,7 @@ def query_route_osrm(start, end, method):
     return req.json()['route_geometry']
 
 
-def decode_polyline(point_str):
+def decode_polyline(point_str, gmaps=False):
     """
     Decodes a polyline that has been encoded using Google's algorithm
     http://code.google.com/apis/maps/documentation/polylinealgorithm.html
@@ -119,7 +119,12 @@ def decode_polyline(point_str):
         coord >>= 1
         # https://github.com/Project-OSRM/osrm-backend/issues/713
         # (OSRM returns higher-precision coordinates)
-        coord /= 1000000.
+        # NB this is not the case for Google Directions Polylines
+        # they only need coord coord /= 1000000.
+        if not gmaps:
+            coord /= 1000000.
+        else:
+            coord /= 100000.
         coords.append(coord)
     # convert the 1d list to a 2d list & offsets to actual values
     points = []
