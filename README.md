@@ -1,4 +1,4 @@
-# Comparing Route Characteristics
+# Comparing The Cycle Route Characteristics of Three Routing Engines
 Routers analysed: [OSRM](http://project-osrm.org), [Valhalla](https://mapzen.com/projects/valhalla/), [Google Maps Directions](https://developers.google.com/maps/documentation/directions/intro)
 
 [![Routers](route_distance_gh.png)](OSRM_vs_Valhalla.ipynb)  
@@ -15,3 +15,4 @@ Can be found in the `html` directory. You may have to refresh the page in order 
 # License
 [MIT](license.txt)
 
+[![CASA](https://dl.dropboxusercontent.com/u/21382/casa_black.png)](http://www.bartlett.ucl.ac.uk/casa/programmes/postgraduate "Bloomsbury is lovely, you know.")
