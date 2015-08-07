@@ -1,4 +1,8 @@
-# The Notebook
+# Comparing Route Characteristics
+Routers analysed: [OSRM](http://project-osrm.org), [Valhalla](https://mapzen.com/projects/valhalla/), [Google Maps Directions](https://developers.google.com/maps/documentation/directions/intro)
+
+[![Routers](route_distance_gh.png)](OSRM_vs_Valhalla.ipynb)  
+
 First, ensure you've installed all the packages from [requirements.txt](requirements.txt).  
 `Basemap` can be pain to install, but a recent version of pip and `pip install basemap --allow-external basemap --allow-unverified basemap` should work.  
 
