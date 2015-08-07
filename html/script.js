@@ -2,8 +2,10 @@ $(function() {
     // we'll be populating this with our GeoJSON layers
     var routes = {
         "Valhalla": null,
-        "OSRM": null
+        "OSRM": null,
+        "GMaps": null
     };
+
     var map = L.map('map').setView([51.500829999995766, -0.12203999999842599], 12);
     var bg = L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -20,6 +22,12 @@ $(function() {
 
     var osrmStyle = {
         "color": "#E87600",
+        "weight": .65,
+        "opacity": 0.5
+    };
+
+    var gmapsStyle = {
+        "color": "#9B30FF",
         "weight": .65,
         "opacity": 0.5
     };
@@ -42,7 +50,17 @@ $(function() {
         });
         routes.OSRM.setStyle(osrmStyle);
         routes.OSRM.addTo(map);
-        // this is the second layer, so attach it to the map
+    });
+
+    $.getJSON("gmaps_geojson.json", function(data) {
+        routes.GMaps = L.geoJson(data, {
+            onEachFeature: function (feature, layer) {
+                layer.bindPopup(feature.properties.name);
+            }
+        });
+        routes.GMaps.setStyle(gmapsStyle);
+        routes.GMaps.addTo(map);
+        // this is the third layer, so attach it to the map
         L.control.layers(null, routes).addTo(map);
     });
 });
