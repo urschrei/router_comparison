@@ -6,6 +6,21 @@ from itertools import chain
 from shapely.geometry import LineString
 
 
+"""
+If you wish to retrieve route data directly into a DataFrame
+
+def route_valhalla(df, start):
+    return query_route_valhalla(api_key, start, (df['lon'], df['lat']), 'bicycle')
+
+df['valhalla_route'] = df.apply(
+    route_valhalla, args=((-0.12203999999842599, 51.500829999995766),), axis=1)
+
+If the function returns multiple columns, do:
+df['col1'], df['col2'] = zip(*
+    df.apply(...))
+
+"""
+
 def query_route_valhalla(
     key,
     start,
