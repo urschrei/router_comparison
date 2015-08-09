@@ -83,6 +83,34 @@ def query_route_osrm(start, end, method):
     return req.json()['route_geometry']
 
 
+def query_route_gmaps(start, end, method, key):
+    """ retrieve a bike route from GMaps """
+    url = "https://maps.googleapis.com/maps/api/directions/json"
+    params = {
+        "origin": "%s, %s" % (start[1], start[0]),
+        "destination": "%s, %s" % (end[1], end[0]),
+        "mode": method,
+        "units": "metric",
+        "region": "uk",
+        "key": key
+
+    }
+    req = requests.get(url, params=params)
+    try:
+        req.raise_for_status()
+    except requests.exceptions.HTTPError:
+        return (np.nan, np.nan)
+    # currently one route, containing one leg
+    try:
+        route = req.json()['routes'][0]
+        leg = req.json()['routes'][0]['legs'][0]
+        duration = sum([step['duration']['value'] for step in leg['steps']])
+        overview_polyline = route['overview_polyline']['points']
+    except (KeyError, IndexError):
+        return (np.nan, np.nan)
+    return duration, overview_polyline
+
+
 def decode_polyline(point_str, gmaps=False):
     """
     Decodes a polyline that has been encoded using Google's algorithm
@@ -142,35 +170,6 @@ def decode_polyline(point_str, gmaps=False):
         return LineString(points)
     else:
         return np.nan
-
-
-def query_route_gmaps(start, end, method, key):
-    """ retrieve a bike route from GMaps """
-    url = "https://maps.googleapis.com/maps/api/directions/json"
-    params = {
-        "origin": "%s, %s" % (start[1], start[0]),
-        "destination": "%s, %s" % (end[1], end[0]),
-        "mode": method,
-        "units": "metric",
-        "region": "uk",
-        "key": key
-
-    }
-    req = requests.get(url, params=params)
-    try:
-        req.raise_for_status()
-    except requests.exceptions.HTTPError:
-        return (np.nan, np.nan)
-    # currently one route, containing one leg
-    try:
-        route = req.json()['routes'][0]
-        leg = req.json()['routes'][0]['legs'][0]
-        duration = sum([step['duration']['value'] for step in leg['steps']])
-        overview_polyline = route['overview_polyline']['points']
-#         all_polylines = [step['polyline']['points'] for step in leg['steps']]
-    except (KeyError, IndexError):
-        return (np.nan, np.nan)
-    return duration, overview_polyline #, all_polylines
 
 
 def project_linestring(ls, m, inverse=False):
