@@ -163,7 +163,7 @@ def decode_polyline(point_str, gmaps=False):
         # https://github.com/Project-OSRM/osrm-backend/issues/713
         # (OSRM returns higher-precision coordinates)
         # NB this is not the case for Google Directions Polylines
-        # they only need coord coord /= 1000000.
+        # they only need coord /= 100000.
         if not gmaps:
             coord /= 1000000.
         else:
