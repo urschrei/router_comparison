@@ -61,16 +61,13 @@ def query_route_valhalla(
     endpoint = "https://valhalla.mapzen.com/route"
     params = {"json": json.dumps(route), "api_key": key}
     req = requests.get(endpoint, params=params)
-    import pdb
-    pdb.set_trace()
     try:
         req.raise_for_status()
     except requests.exceptions.HTTPError:
-        return np.nan
+        return (np.nan, np.nan)
     if req.json()['trip']['status'] == 207:
-        return np.nan
-#     return req.json()['trip']['summary']['time'], [leg['shape'] for leg in req.json()['trip']['legs']][0]
-    return [leg['shape'] for leg in req.json()['trip']['legs']][0]
+        return (np.nan, np.nan)
+    return req.json()['trip']['summary']['time'], [leg['shape'] for leg in req.json()['trip']['legs']][0]
 
 
 def query_route_osrm(start, end, method):
@@ -94,8 +91,10 @@ def query_route_osrm(start, end, method):
     try:
         req.raise_for_status()
     except requests.exceptions.HTTPError:
-        return np.nan
-    return req.json()['route_geometry']
+        return (np.nan, np.nan)
+    if req.json().get('status') == 207:
+        return np.nan, np.nan
+    return req.json()['route_summary']['total_time'], req.json()['route_geometry']
 
 
 def query_route_gmaps(start, end, method, key):
