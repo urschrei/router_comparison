@@ -9,15 +9,8 @@ from shapely.geometry import LineString
 """
 If you wish to retrieve route data directly into a DataFrame
 
-def route_valhalla(df, start):
-    return query_route_valhalla(api_key, start, (df['lon'], df['lat']), 'bicycle')
-
-df['valhalla_route'] = df.apply(
-    route_valhalla, args=((-0.12203999999842599, 51.500829999995766),), axis=1)
-
-If the function returns multiple columns, do:
-df['col1'], df['col2'] = zip(*
-    df.apply(...))
+df['travel_time_valhalla'], df['valhalla_route'] = zip(*
+    df.apply(route_valhalla, args=(origin_tuple), axis=1))
 
 """
 
@@ -123,6 +116,18 @@ def query_route_gmaps(start, end, method, key):
     except (KeyError, IndexError):
         return (np.nan, np.nan)
     return duration, overview_polyline
+
+
+def route_valhalla(df, start):
+    return query_route_valhalla(api_key, start, (df['lon'], df['lat']), 'bicycle')
+
+
+def route_gmaps(df, start):
+    return query_route_gmaps(start, (df['lon'], df['lat']), 'bicycling', gmaps_key)
+
+
+def route_osrm(df, start):
+    return query_route_osrm(start, (df['lon'], df['lat']), 'bicycle')
 
 
 def decode_polyline(point_str, gmaps=False):
