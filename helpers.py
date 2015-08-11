@@ -1,3 +1,4 @@
+from __future__ import division
 import requests
 import json
 import pandas as pd
@@ -197,3 +198,15 @@ def project_linestring(ls, m, inverse=False):
         return LineString(zip(*m(*zip(*ls.coords))))
     else:
         return np.nan
+
+
+def similarity(ls1, ls2):
+    """
+    Calculate LineString similarity percentage
+    & is untion, | is intersection
+
+    """
+    set1 = set(ls1.coords)
+    set2 = set(ls2.coords)
+    return (len(set1 & set2) / len(set1 | set2)) * 100
+
