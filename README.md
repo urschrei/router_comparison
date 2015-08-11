@@ -9,6 +9,10 @@ First, ensure you've installed all the packages from [requirements.txt](requirem
 Once this is done, run `ipython notebook` from a shell, and you should see `OSRM_vs_Valhalla` in the list.
 Some helper functions for the retrieval and processing of journeys can be found in [helpers.py](helpers.py)
 
+# Outlier Identification using [RANSAC]()
+[![RANSAC](RANSAC.png)](RANSAC.png)
+
+
 # HTML Route visualisation using Leaflet
 Can be found in the `html` directory. You may have to refresh the page in order to display the route toggle control, because I apparently still don't understand JS closures `¯\_(ツ)_/¯`  
 
