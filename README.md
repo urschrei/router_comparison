@@ -19,6 +19,38 @@ Can be found in the `html` directory. You may have to refresh the page in order 
 
 [![Map](map.png)](html/script.js)
 
+# Missing Stations
+Routes can't be mapped to all stations in the network due to an issue with the underlying OpenStreetmap data. Interesting, isn't it?  
+
+|Station Name (27 stations)|
+:---------:
+|Belgrove Street , King's Cross|
+|Finsbury Library , Finsbury|
+|Euston Road, Euston|
+|Park Road (Baker Street), The Regent's Park|
+|Wapping High Street, Wapping|
+|Clerkenwell Green, Clerkenwell|
+|Waterloo Place, St. James's|
+|Baylis Road, Waterloo|
+|Craven Street, Strand|
+|Prince Consort Road, Knightsbridge|
+|Waterloo Station 1, Waterloo|
+|Paddington Green Police Station, Paddington|
+|Old Ford Road, Bethnal Green|
+|South Quay East, Canary Wharf|
+|Westferry DLR, Limehouse|
+|Jubilee Plaza, Canary Wharf|
+|Green Park Station, Mayfair|
+|East India DLR, Blackwall|
+|Montgomery Square, Canary Wharf|
+|Heron Quays DLR, Canary Wharf|
+|Westfield Southern Terrace ,Shepherd's Bush|
+|Globe Town Market, Bethnal Green|
+|Coomer Place, West Kensington|
+|West Kensington Station, West Kensington|
+|Ravenscourt Park Station, Hammersmith|
+|Stephendale Road, Sands End|
+|Rossmore Road, Marylebone|
 # License
 [MIT](license.txt)
 
