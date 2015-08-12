@@ -1,6 +1,6 @@
 pandas
 matplotlib
-ipython[all]
+jupyter[all]
 sklearn
 scipy
 numpy
