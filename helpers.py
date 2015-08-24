@@ -119,6 +119,25 @@ def query_route_gmaps(start, end, method, key):
     return duration, overview_polyline
 
 
+def query_elevation(polyline, key):
+    """ retrieve elevations for a polyline from GMaps """
+    url = "https://maps.googleapis.com/maps/api/elevation/json"
+    params = {
+        "locations": "enc:%s" % polyline,
+        "key": key
+    }
+    req = requests.get(url, params=params)
+    try:
+        req.raise_for_status()
+    except requests.exceptions.HTTPError:
+        return np.nan
+    try:
+        elevations = req.json()['results']
+    except (KeyError, IndexError):
+        return np.nan
+    return elevations
+
+
 def route_valhalla(df, start):
     return query_route_valhalla(api_key, start, (df['lon'], df['lat']), 'bicycle')
 
