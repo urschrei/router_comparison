@@ -4,7 +4,7 @@ import json
 import pandas as pd
 import numpy as np
 from itertools import chain
-from shapely.geometry import LineString
+from shapely.geometry import LineString, Point
 
 
 """
@@ -229,3 +229,16 @@ def similarity(ls1, ls2):
     set2 = set(ls2.coords)
     return (len(set1 & set2) / len(set1 | set2)) * 100
 
+
+def pairs(line):
+    """ yield line segment start and end points for input line """
+    for i in xrange(1, len(line)):
+        yield line[i - 1], line[i]
+
+
+def segmentise(line):
+    """ returns a list of linestring sub-segments for the input """
+    return [
+        LineString([Point(seg_start).coords[0], Point(seg_end).coords[0]])
+        for seg_start, seg_end in pairs(line.coords)
+    ]
